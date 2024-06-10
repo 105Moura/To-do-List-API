@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "77408804-cca7-48e6-866a-2a5cec321251",
+		"name": "Todo List API",
+		"description": "StartFragment\n\n#### Visão Geral\n\nEsta API permite que os usuários gerenciem suas tarefas. Inclui funcionalidades para registrar e autenticar usuários, além de criar, ler, atualizar e excluir tarefas. Todas as operações relacionadas às tarefas exigem autenticação via JWT.\n\n#### Base URL\n\n[http://192.168.1.13:3000/api](http://192.168.1.13:3000/api)\n\nEndFragment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36090696"
+	},
+	"item": [
+		{
+			"name": "Criar Usuário",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "StartFragment\n\n#### Registro de Usuário\n\n- **Endpoint:** `/users/register`\n    \n- **Método:** `POST`\n    \n- **Descrição:** Registra um novo usuário.\n    \n- **Headers:**\n    \n    - `Content-Type`: `application/json`\n        \n- jsonCopiar código{ \"username\": \"string\", \"password\": \"string\"}\n    \n- **Respostas:**\n    \n    - jsonCopiar código{ \"user\": { \"username\": \"string\", \"password\": \"hashed_string\", \"_id\": \"string\", \"__v\": 0 }, \"token\": \"JWT_token\"}\n        \n    - **400 Bad Request:** Erro de validação ou usuário já existente.\n        \n\nEndFragment"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "StartFragment\n\n#### Login de Usuário\n\n- **Endpoint:** `/users/login`\n    \n- **Método:** `POST`\n    \n- **Descrição:** Realiza o login de um usuário.\n    \n- **Headers:**\n    \n    - `Content-Type`: `application/json`\n        \n- jsonCopiar código{ \"username\": \"string\", \"password\": \"string\"}\n    \n- **Respostas:**\n    \n    - jsonCopiar código{ \"user\": { \"_id\": \"string\", \"username\": \"string\", \"password\": \"hashed_string\", \"__v\": 0 }, \"token\": \"JWT_token\"}\n        \n    - **400 Bad Request:** Credenciais inválidas.\n        \n    - **500 Internal Server Error:** Erro no servidor.\n        \n\nEndFragment"
+			},
+			"response": []
+		},
+		{
+			"name": "Criar tarefa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "StartFragment\n\n#### Criar uma Tarefa\n\n- **Endpoint:** `/tasks`\n    \n- **Método:** `POST`\n    \n- **Descrição:** Cria uma nova tarefa.\n    \n- **Headers:**\n    \n    - `Content-Type`: `application/json`\n        \n    - `Authorization`: `Bearer JWT_token`\n        \n- jsonCopiar código{ \"title\": \"string\", \"description\": \"string\", \"dueDate\": \"YYYY-MM-DD\", \"priority\": \"low | medium | high\", \"status\": \"pending | in progress | completed\"}\n    \n- **Respostas:**\n    \n    - jsonCopiar código{ \"title\": \"string\", \"description\": \"string\", \"dueDate\": \"YYYY-MM-DD\", \"priority\": \"string\", \"status\": \"string\", \"user\": \"string\", \"_id\": \"string\", \"__v\": 0}\n        \n    - **400 Bad Request:** Erro de validação.\n        \n    - **401 Unauthorized:** Token JWT ausente ou inválido.\n        \n\nEndFragment"
+			},
+			"response": []
+		},
+		{
+			"name": "Obter tarefas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "StartFragment\n\n#### Obter Todas as Tarefas\n\n- **Endpoint:** `/tasks`\n    \n- **Método:** `GET`\n    \n- **Descrição:** Retorna todas as tarefas do usuário autenticado.\n    \n- **Headers:**\n    \n    - `Authorization`: `Bearer JWT_token`\n        \n- **Respostas:**\n    \n    - jsonCopiar código\\[ { \"_id\": \"string\", \"title\": \"string\", \"description\": \"string\", \"dueDate\": \"YYYY-MM-DD\", \"priority\": \"string\", \"status\": \"string\", \"user\": \"string\", \"__v\": 0 }\\]\n        \n    - **500 Internal Server Error:** Erro no servidor.\n        \n    - **401 Unauthorized:** Token JWT ausente ou inválido.\n        \n\nEndFragment"
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar tarefa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "StartFragment\n\n#### Atualizar uma Tarefa\n\n- **Endpoint:** `/tasks/:id`\n    \n- **Método:** `PATCH`\n    \n- **Descrição:** Atualiza uma tarefa existente.\n    \n- **Headers:**\n    \n    - `Content-Type`: `application/json`\n        \n    - `Authorization`: `Bearer JWT_token`\n        \n- jsonCopiar código{ \"title\": \"string\", \"description\": \"string\", \"dueDate\": \"YYYY-MM-DD\", \"priority\": \"low | medium | high\", \"status\": \"pending | in progress | completed\"}\n    \n- **Respostas:**\n    \n    - jsonCopiar código{ \"_id\": \"string\", \"title\": \"string\", \"description\": \"string\", \"dueDate\": \"YYYY-MM-DD\", \"priority\": \"string\", \"status\": \"string\", \"user\": \"string\", \"__v\": 0}\n        \n    - **400 Bad Request:** Erro de validação.\n        \n    - **401 Unauthorized:** Token JWT ausente ou inválido.\n        \n    - **404 Not Found:** Tarefa não encontrada.\n        \n\nEndFragment"
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir tarefa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "StartFragment\n\n#### Excluir uma Tarefa\n\n- **Endpoint:** `/tasks/:id`\n    \n- **Método:** `DELETE`\n    \n- **Descrição:** Exclui uma tarefa existente.\n    \n- **Headers:**\n    \n    - `Authorization`: `Bearer JWT_token`\n        \n- **Respostas:**\n    \n    - jsonCopiar código{ \"_id\": \"string\", \"title\": \"string\", \"description\": \"string\", \"dueDate\": \"YYYY-MM-DD\", \"priority\": \"string\", \"status\": \"string\", \"user\": \"string\", \"__v\": 0}\n        \n    - **401 Unauthorized:** Token JWT ausente ou inválido.\n        \n    - **404 Not Found:** Tarefa não encontrada.\n        \n    - **500 Internal Server Error:** Erro no servidor.\n        \n\nEndFragment"
+			},
+			"response": []
+		}
+	]
+}
